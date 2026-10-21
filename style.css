@@ -121,3 +121,38 @@ h2 { font: 500 clamp(2.6rem, 5.5vw, 5rem)/1.08 var(--serif); letter-spacing: -.0
 
 .instagram-link { display: block; margin-top: 16px; text-align: center; color: var(--gold); font-size: .78rem; text-decoration: underline; text-underline-offset: 4px; }
 .instagram-link:hover { color: #f0d7a6; }
+
+
+/* ZYCEE custom touches: subtle orange particles, scroll reveals, contact details */
+#particleCanvas {
+  position: fixed;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+  opacity: .62;
+}
+.site-header, .hero, main > section, .footer { position: relative; }
+.site-header { z-index: 6; }
+.hero { isolation: isolate; }
+.hero-image, .hero-shade { z-index: -1; }
+.hero-content, .hero-bottom { z-index: 2; }
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity .75s ease, transform .75s cubic-bezier(.2,.65,.25,1);
+}
+.scroll-reveal.is-visible { opacity: 1; transform: translateY(0); }
+.contact-form .date-hint { margin: -13px 0 18px; color: var(--muted); font-size: .68rem; }
+.contact-details { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 25px; }
+.contact-details a { display: flex; flex-direction: column; gap: 3px; border: 1px solid var(--line); padding: 15px; transition: border-color .2s, background .2s; }
+.contact-details a:hover { border-color: var(--gold); background: rgba(216,183,120,.05); }
+.contact-details strong { font-size: .88rem; font-weight: 600; overflow-wrap: anywhere; }
+.contact-details a > span:last-child { color: var(--gold); font-size: .7rem; margin-top: 5px; }
+.contact-label { color: var(--muted); font-size: .58rem; letter-spacing: .16em; }
+@media (max-width: 480px) {
+  .contact-details { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .scroll-reveal { opacity: 1; transform: none; transition: none; }
+  #particleCanvas { display: none; }
+}
