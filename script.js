@@ -40,22 +40,60 @@ document.getElementById("contactForm").addEventListener("submit", (event) => {
   window.open(url, "_blank", "noopener,noreferrer");
 });
 
-// Fade content in as it enters view while scrolling.
-const revealTargets = document.querySelectorAll(".intro, .section-heading, .work-card, .service-row, .quote-band, .contact-copy, .contact-form, .footer");
+// Viewport-focused scroll reveal: sections fade IN when entering the screen and fade OUT
+// after leaving it, so attention stays on the current layer instead of content above/below.
+const revealTargets = document.querySelectorAll(
+  ".intro, .section-heading, .work-card, .service-row, .quote-band, .contact-copy, .contact-form, .footer"
+);
 revealTargets.forEach((element) => element.classList.add("scroll-reveal"));
 if ("IntersectionObserver" in window && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-  const revealObserver = new IntersectionObserver((entries, observer) => {
+  const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("is-visible");
-        observer.unobserve(entry.target);
-      }
+      // Keep the reveal active only while the element is within the central viewing band.
+      entry.target.classList.toggle("is-visible", entry.isIntersecting);
     });
-  }, { threshold: 0.12, rootMargin: "0px 0px -35px 0px" });
+  }, { threshold: 0.08, rootMargin: "-10% 0px -12% 0px" });
   revealTargets.forEach((element) => revealObserver.observe(element));
 } else {
   revealTargets.forEach((element) => element.classList.add("is-visible"));
 }
+
+// Soft, satisfying UI click made with Web Audio (no audio file or extra hosting needed).
+// Browsers only allow it after a user gesture, so the first tap unlocks audio safely.
+let clickAudioContext;
+function playSoftClick() {
+  try {
+    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+    if (!AudioContextClass) return;
+    if (!clickAudioContext) clickAudioContext = new AudioContextClass();
+    if (clickAudioContext.state === "suspended") clickAudioContext.resume();
+    const now = clickAudioContext.currentTime;
+    const osc = clickAudioContext.createOscillator();
+    const gain = clickAudioContext.createGain();
+    const filter = clickAudioContext.createBiquadFilter();
+    osc.type = "sine";
+    osc.frequency.setValueAtTime(1250, now);
+    osc.frequency.exponentialRampToValueAtTime(720, now + 0.028);
+    filter.type = "lowpass";
+    filter.frequency.setValueAtTime(2200, now);
+    gain.gain.setValueAtTime(0.0001, now);
+    gain.gain.exponentialRampToValueAtTime(0.055, now + 0.004);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.045);
+    osc.connect(filter);
+    filter.connect(gain);
+    gain.connect(clickAudioContext.destination);
+    osc.start(now);
+    osc.stop(now + 0.05);
+  } catch (_) {
+    // Sound is an enhancement only; never interrupt navigation if audio is unavailable.
+  }
+}
+
+// Play a gentle click for taps/clicks on controls and links, not while typing each character.
+document.addEventListener("click", (event) => {
+  const target = event.target.closest("button, a, select, input[type='date'], input[type='checkbox'], input[type='radio']");
+  if (target) playSoftClick();
+}, { passive: true });
 
 // Subtle floating orange particles. The canvas never blocks taps or scrolling.
 const canvas = document.getElementById("particleCanvas");

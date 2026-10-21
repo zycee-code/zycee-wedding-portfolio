@@ -138,10 +138,24 @@ h2 { font: 500 clamp(2.6rem, 5.5vw, 5rem)/1.08 var(--serif); letter-spacing: -.0
 .hero-content, .hero-bottom { z-index: 2; }
 .scroll-reveal {
   opacity: 0;
-  transform: translateY(22px);
-  transition: opacity .75s ease, transform .75s cubic-bezier(.2,.65,.25,1);
+  transform: translateY(34px) scale(.985);
+  filter: blur(3px);
+  transition: opacity .55s ease, transform .65s cubic-bezier(.2,.75,.25,1), filter .55s ease;
+  will-change: opacity, transform, filter;
 }
-.scroll-reveal.is-visible { opacity: 1; transform: translateY(0); }
+/* Content is readable only while it is in the active viewing area.
+   It fades away again as it leaves the screen, rather than staying visible above/below. */
+.scroll-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
+}
+/* Tiny tactile hover/press feedback pairs with the soft UI click sound. */
+button, a, select { -webkit-tap-highlight-color: transparent; }
+button:active, .button:active, .nav a:active, .contact-details a:active {
+  transform: scale(.985);
+}
+button, .button, .nav a, .contact-details a { transition: transform .16s ease, border-color .2s, background .2s, color .2s; }
 .contact-form .date-hint { margin: -13px 0 18px; color: var(--muted); font-size: .68rem; }
 .contact-details { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 25px; }
 .contact-details a { display: flex; flex-direction: column; gap: 3px; border: 1px solid var(--line); padding: 15px; transition: border-color .2s, background .2s; }
@@ -153,6 +167,6 @@ h2 { font: 500 clamp(2.6rem, 5.5vw, 5rem)/1.08 var(--serif); letter-spacing: -.0
   .contact-details { grid-template-columns: 1fr; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .scroll-reveal { opacity: 1; transform: none; transition: none; }
+  .scroll-reveal { opacity: 1; transform: none; filter: none; transition: none; }
   #particleCanvas { display: none; }
 }
