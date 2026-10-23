@@ -229,18 +229,77 @@
     backgroundMusic.addEventListener('pause', () => setMusicUI(false));
   }
 
-  // ZYCEE 3D wedding image flip interaction
+  // ZYCEE 360-degree finger-controlled 3D card
   const heroFlipCard = document.getElementById('hero-flip-card');
   if (heroFlipCard) {
-    function flipHeroCard() {
-      const flipped = heroFlipCard.classList.toggle('is-flipped');
-      heroFlipCard.setAttribute('aria-pressed', String(flipped));
+    let angle = 0;
+    let startX = 0;
+    let startAngle = 0;
+    let pointerId = null;
+    let dragged = false;
+    let suppressClick = false;
+
+    function setAngle(value) {
+      angle = ((value % 360) + 360) % 360;
+      heroFlipCard.style.setProperty('--flip-angle', angle + 'deg');
+      const showingBack = angle > 90 && angle < 270;
+      heroFlipCard.setAttribute('aria-pressed', String(showingBack));
     }
-    heroFlipCard.addEventListener('click', flipHeroCard);
+
+    heroFlipCard.addEventListener('pointerdown', event => {
+      if (event.pointerType === 'mouse' && event.button !== 0) return;
+      pointerId = event.pointerId;
+      startX = event.clientX;
+      startAngle = angle;
+      dragged = false;
+      suppressClick = false;
+      heroFlipCard.classList.add('is-dragging');
+      try { heroFlipCard.setPointerCapture(pointerId); } catch (_) {}
+    });
+
+    heroFlipCard.addEventListener('pointermove', event => {
+      if (pointerId !== event.pointerId) return;
+      const deltaX = event.clientX - startX;
+      if (Math.abs(deltaX) > 5) dragged = true;
+      if (dragged) {
+        // Move your finger horizontally to rotate the card through a full 360°.
+        setAngle(startAngle + deltaX * 1.15);
+      }
+    });
+
+    function finishDrag(event) {
+      if (pointerId !== event.pointerId) return;
+      if (dragged) suppressClick = true;
+      pointerId = null;
+      heroFlipCard.classList.remove('is-dragging');
+    }
+    heroFlipCard.addEventListener('pointerup', finishDrag);
+    heroFlipCard.addEventListener('pointercancel', finishDrag);
+    heroFlipCard.addEventListener('lostpointercapture', () => {
+      pointerId = null;
+      heroFlipCard.classList.remove('is-dragging');
+    });
+
+    // A simple tap still flips to the other side; dragging rotates freely.
+    heroFlipCard.addEventListener('click', event => {
+      if (suppressClick) {
+        suppressClick = false;
+        event.preventDefault();
+        return;
+      }
+      setAngle(angle + 180);
+    });
+
     heroFlipCard.addEventListener('keydown', event => {
       if (event.key === 'Enter' || event.key === ' ') {
         event.preventDefault();
-        flipHeroCard();
+        setAngle(angle + 180);
+      } else if (event.key === 'ArrowRight') {
+        event.preventDefault();
+        setAngle(angle + 30);
+      } else if (event.key === 'ArrowLeft') {
+        event.preventDefault();
+        setAngle(angle - 30);
       }
     });
   }
