@@ -1,123 +1,126 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#11100f">
-  <meta name="description" content="ZYCEE — wedding films, fast cuts, and celebration edits crafted with feeling.">
-  <title>ZYCEE — Your Story, Beautifully Edited</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#11100e">
+  <meta name="description" content="ZYCEE — cinematic wedding films, fast cuts, and timeless edits.">
+  <title>ZYCEE — Wedding Films & Edits</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="ambient" aria-hidden="true"></div>
   <header class="site-header">
     <a class="brand" href="#home" aria-label="ZYCEE home">ZYCEE<span>®</span></a>
-    <button class="menu-toggle" aria-label="Open navigation" aria-expanded="false">☰</button>
-    <nav class="nav" aria-label="Main navigation">
+    <button class="menu-toggle" id="menuToggle" aria-label="Open navigation" aria-expanded="false">☰</button>
+    <nav class="nav" id="nav">
+      <a href="#work">Selected work</a>
       <a href="#services">Services</a>
-      <a href="#work">Portfolio</a>
-      <a href="#process">How it works</a>
-      <a class="nav-cta" href="#contact">Let's talk <span>↗</span></a>
+      <a href="#about">About</a>
+      <a class="nav-cta" href="#contact">Book an edit <span>↗</span></a>
     </nav>
   </header>
 
   <main>
-    <section class="hero section-wrap" id="home">
-      <div class="hero-copy reveal">
-        <p class="eyebrow"><span class="eyebrow-line"></span> WEDDING & CELEBRATION EDITS</p>
-        <h1>Your story.<br><em>Beautifully</em> edited.</h1>
-        <p class="hero-text">We turn your favourite moments into films and edits you’ll want to watch again and again.</p>
+    <section class="hero" id="home">
+      <div class="hero-image" role="img" aria-label="Cinematic wedding celebration"></div>
+      <div class="hero-shade"></div>
+      <div class="hero-content">
+        <p class="eyebrow"><span class="dot"></span> WEDDING FILMS · STORY-DRIVEN EDITS</p>
+        <h1>Moments fade.<br><em>Stories stay.</em></h1>
+        <p class="hero-copy">Cinematic wedding edits made to feel as beautiful as the day itself.</p>
         <div class="hero-actions">
-          <a class="button button-gold" href="#work">Explore our work <span>↓</span></a>
-          <a class="text-link" href="#process">New here? Start here <span>↗</span></a>
+          <a class="button button-gold" href="#work">Explore the work <span>↓</span></a>
+          <a class="text-link" href="#contact">Let's create together <span>↗</span></a>
         </div>
-        <div class="hero-note"><span class="status-dot"></span> Thoughtful edits for your once-in-a-lifetime moments</div>
       </div>
-      <div class="hero-art reveal">
-        <div class="image-frame hero-image">
-          <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=85" alt="A couple celebrating their wedding" fetchpriority="high">
-          <div class="image-label"><span>01 / THE FEELING</span><span>WEDDING STORIES</span></div>
-        </div>
-        <div class="floating-note"><span class="note-star">✳</span><span>Every frame<br><em>means something.</em></span></div>
-        <div class="hero-orbit" aria-hidden="true">MADE WITH FEELING · MADE WITH FEELING · </div>
-      </div>
-      <a class="scroll-cue" href="#services"><span></span> SCROLL TO DISCOVER</a>
+      <div class="hero-bottom"><span>INDEPENDENT EDITING STUDIO</span><span>CRAFTED WITH FEELING · EST. 2026</span></div>
     </section>
 
-    <section class="intro section-wrap reveal">
-      <p class="eyebrow">A LITTLE ABOUT US</p>
+    <section class="intro section-wrap">
+      <p class="section-kicker">THE ZYCEE APPROACH</p>
       <div class="intro-grid">
-        <h2>Not just an edit.<br><em>A feeling you keep.</em></h2>
-        <div>
-          <p class="intro-text">The best moments deserve more than a quick cut. ZYCEE brings rhythm, emotion and detail together to create edits that feel like <em>your</em> story.</p>
-          <a class="text-link" href="#contact">Tell us what you’re imagining <span>↗</span></a>
-        </div>
-      </div>
-    </section>
-
-    <section class="services section-wrap" id="services">
-      <div class="section-heading reveal">
-        <div><p class="eyebrow">WHAT WE CAN CREATE</p><h2>Choose your <em>kind of magic.</em></h2></div>
-        <p>Not sure which one you need? Pick the closest match and tell us your idea.</p>
-      </div>
-      <div class="service-grid">
-        <article class="service-card reveal">
-          <div class="service-image"><img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=900&q=80" alt="Wedding celebration" loading="lazy"><span class="service-number">01</span></div>
-          <div class="service-body"><h3>Wedding Films</h3><p>Emotional, cinematic edits made to bring your day back to life.</p><a href="#contact" class="card-link" data-service="Wedding Films">I need a wedding edit <span>↗</span></a></div>
-        </article>
-        <article class="service-card reveal">
-          <div class="service-image"><img src="https://images.unsplash.com/photo-1537633552985-df8429e8048b?auto=format&fit=crop&w=900&q=80" alt="Couple portrait outdoors" loading="lazy"><span class="service-number">02</span></div>
-          <div class="service-body"><h3>Fast Cuts</h3><p>Energetic, beat-matched edits for reels, highlights and social posts.</p><a href="#contact" class="card-link" data-service="Fast Cuts">I need a fast cut <span>↗</span></a></div>
-        </article>
-        <article class="service-card reveal">
-          <div class="service-image"><img src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?auto=format&fit=crop&w=900&q=80" alt="Beautiful celebration table and cake" loading="lazy"><span class="service-number">03</span></div>
-          <div class="service-body"><h3>Birthday Edits</h3><p>Fun, personal celebration edits full of colour, movement and memories.</p><a href="#contact" class="card-link" data-service="Birthday Edits">I need a birthday edit <span>↗</span></a></div>
-        </article>
+        <h2>Your story,<br><em>beautifully told.</em></h2>
+        <p>From the quiet details to the once-in-a-lifetime moments, we shape your footage into a film you’ll want to revisit for years. Thoughtful pacing, rich color, and emotion at the heart of every cut.</p>
       </div>
     </section>
 
     <section class="work section-wrap" id="work">
-      <div class="section-heading reveal">
-        <div><p class="eyebrow">SELECTED INSPIRATION</p><h2>Moments, made <em>memorable.</em></h2></div>
-        <p>These are visual examples of the mood we love. Ask us about a style that fits your own footage.</p>
+      <div class="section-heading">
+        <div><p class="section-kicker">A FEW FAVORITES</p><h2>Selected <em>work</em></h2></div>
+        <p>Every frame has a feeling.<br>Every edit has a story.</p>
       </div>
-      <div class="gallery">
-        <figure class="gallery-large reveal"><img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1400&q=85" alt="Wedding reception with warm lights" loading="lazy"><figcaption><span>THE CELEBRATION</span><span>Warm · Timeless</span></figcaption></figure>
-        <figure class="gallery-small reveal"><img src="https://images.unsplash.com/photo-1523438885200-e635ba2c371e?auto=format&fit=crop&w=1000&q=85" alt="Wedding bouquet and details" loading="lazy"><figcaption><span>THE DETAILS</span><span>Soft · Elegant</span></figcaption></figure>
-        <figure class="gallery-small reveal"><img src="https://images.unsplash.com/photo-1507504031003-b417219a0	delete?auto=format&fit=crop&w=1000&q=85" alt="Wedding celebration outdoors" loading="lazy"><figcaption><span>THE MOMENT</span><span>Real · Emotional</span></figcaption></figure>
+      <div class="work-grid">
+        <article class="work-card work-large">
+          <a class="work-image image-one" href="#contact" aria-label="Ask about wedding highlight edits"><span class="play-mark">↗</span></a>
+          <div class="work-meta"><div><h3>The Wedding Film</h3><p>Romantic · Cinematic highlight</p></div><span>01 / WEDDING</span></div>
+        </article>
+        <article class="work-card work-small">
+          <a class="work-image image-two" href="#contact" aria-label="Ask about fast-cut edits"><span class="play-mark">↗</span></a>
+          <div class="work-meta"><div><h3>In Every Moment</h3><p>Fast cut · Social edit</p></div><span>02 / FAST CUT</span></div>
+        </article>
+        <article class="work-card work-small">
+          <a class="work-image image-three" href="#contact" aria-label="Ask about birthday edits"><span class="play-mark">↗</span></a>
+          <div class="work-meta"><div><h3>A Day to Remember</h3><p>Birthday · Celebration</p></div><span>03 / EVENTS</span></div>
+        </article>
       </div>
-      <p class="gallery-disclaimer">Portfolio imagery shown for mood and inspiration; replace with your own completed edits when ready.</p>
+      <p class="demo-note">Portfolio preview images are illustrative. Replace these with your own work before publishing.</p>
     </section>
 
-    <section class="process section-wrap" id="process">
-      <div class="section-heading reveal"><div><p class="eyebrow">FIRST TIME HERE?</p><h2>It’s simple. <em>Here’s how.</em></h2></div><p>You don’t need to know editing terms. Just tell us what you want to create.</p></div>
-      <div class="steps">
-        <article class="step reveal"><span>01</span><div><h3>Choose a service</h3><p>Wedding film, fast cut or birthday edit — select what sounds right.</p></div></article>
-        <article class="step reveal"><span>02</span><div><h3>Tell us your idea</h3><p>Share the occasion, your preferred style and any deadline you have.</p></div></article>
-        <article class="step reveal"><span>03</span><div><h3>Chat with ZYCEE</h3><p>We’ll discuss your footage, details, price and next steps on WhatsApp.</p></div></article>
+    <section class="services section-wrap" id="services">
+      <div class="section-heading">
+        <div><p class="section-kicker">WHAT WE DO</p><h2>Made for your <em>moments.</em></h2></div>
+        <p>Flexible editing services for creators, couples, and families.</p>
       </div>
+      <div class="service-list">
+        <article class="service-row"><span class="service-number">01</span><div><h3>Wedding Highlights</h3><p>Emotional storytelling, polished pacing, and cinematic color.</p></div><span class="service-arrow">↗</span></article>
+        <article class="service-row"><span class="service-number">02</span><div><h3>Fast Cuts & Reels</h3><p>Beat-matched edits for social media and memorable moments.</p></div><span class="service-arrow">↗</span></article>
+        <article class="service-row"><span class="service-number">03</span><div><h3>Birthday & Events</h3><p>Bring the energy, details, and people together in one edit.</p></div><span class="service-arrow">↗</span></article>
+        <article class="service-row"><span class="service-number">04</span><div><h3>Color & Final Polish</h3><p>Consistent color, clean transitions, and a refined final cut.</p></div><span class="service-arrow">↗</span></article>
+      </div>
+      <p class="pricing-note">Need a quote? Tell us about your footage, edit style, and deadline.</p>
+    </section>
+
+    <section class="quote-band" id="about">
+      <p class="section-kicker">A LITTLE ABOUT ZYCEE</p>
+      <blockquote>“The best edits don’t just show what happened.<br><em>They bring you back to how it felt.</em>”</blockquote>
+      <p class="quote-caption">INDEPENDENT WEDDING & EVENT EDITING</p>
     </section>
 
     <section class="contact section-wrap" id="contact">
-      <div class="contact-panel reveal">
-        <div class="contact-copy"><p class="eyebrow">YOUR MOMENT STARTS HERE</p><h2>Have a story<br>for us to <em>edit?</em></h2><p>Tell us a little about your project. We’ll continue the conversation on WhatsApp.</p><div class="contact-details"><span>INSTAGRAM</span><a href="https://www.instagram.com/zycee__/" target="_blank" rel="noopener">@zycee__ ↗</a></div></div>
-        <form class="booking-form" id="booking-form">
-          <label for="client-name">Your name</label><input id="client-name" name="name" placeholder="What should we call you?" required>
-          <label for="service">What do you need?</label><select id="service" name="service" required><option value="">Choose a service</option><option>Wedding Films</option><option>Fast Cuts</option><option>Birthday Edits</option><option>Something else</option></select>
-          <label for="event-date">Event date (optional)</label><input id="event-date" name="date" type="date">
-          <label for="project-notes">Tell us a little more</label><textarea id="project-notes" name="notes" rows="3" placeholder="Occasion, style, deadline…"></textarea>
-          <button class="button button-gold form-submit" type="submit">Continue on WhatsApp <span>↗</span></button>
-          <p class="form-note">This opens WhatsApp with your message ready to send. Nothing is sent automatically.</p>
-        </form>
+      <div class="contact-copy">
+        <p class="section-kicker">HAVE A PROJECT IN MIND?</p>
+        <h2>Let's make<br>it <em>memorable.</em></h2>
+        <p>Share your idea, the kind of edit you need, and your timeline. We'll get the conversation started.</p>
       </div>
+      <form id="contactForm" class="contact-form">
+        <label for="clientName">Your name</label>
+        <input id="clientName" name="clientName" type="text" placeholder="Name" required>
+        <label for="serviceType">What do you need?</label>
+        <select id="serviceType" name="serviceType">
+          <option>Wedding highlight</option>
+          <option>Fast cut / Reel</option>
+          <option>Birthday / Event edit</option>
+          <option>Color grading / Final polish</option>
+          <option>Something else</option>
+        </select>
+        <label for="projectDetails">Tell us a little about it</label>
+        <textarea id="projectDetails" name="projectDetails" rows="3" placeholder="Style, length, deadline…"></textarea>
+        <button class="button button-gold submit-button" type="submit">Start a WhatsApp enquiry <span>↗</span></button>
+        <p class="form-note">Opens WhatsApp with your message ready to send.</p>
+        <a class="instagram-link" href="https://www.instagram.com/zycee__/" target="_blank" rel="noopener noreferrer">Or message us on Instagram @zycee__ ↗</a>
+      </form>
     </section>
   </main>
 
-  <footer class="footer section-wrap"><a class="brand" href="#home">ZYCEE<span>®</span></a><p>Made with feeling. Edited with care.</p><a href="#home" class="back-top">BACK TO TOP ↑</a><small>© <span id="year"></span> ZYCEE. All rights reserved.</small></footer>
-  <button class="sound-toggle" type="button" aria-pressed="false"><span class="sound-icon">♪</span> <span class="sound-label">Sounds off</span></button>
+  <footer class="footer">
+    <a class="brand" href="#home">ZYCEE<span>®</span></a>
+    <p>WEDDING FILMS · FAST CUTS · CELEBRATIONS</p>
+    <a href="#home" class="back-top">Back to top ↑</a>
+    <small>© <span id="year"></span> ZYCEE. Made with feeling.</small>
+  </footer>
   <script src="script.js"></script>
 </body>
 </html>
