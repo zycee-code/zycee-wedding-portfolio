@@ -142,4 +142,89 @@
       window.open(url, '_blank', 'noopener,noreferrer');
     });
   }
+
+  // Added calm looping background music. Playback begins only after visitor interaction.
+  const backgroundMusic = document.getElementById('background-music');
+  const musicWelcome = document.getElementById('music-welcome');
+  const musicEnter = document.getElementById('music-enter');
+  const musicEnterSilent = document.getElementById('music-enter-silent');
+  const musicPlay = document.getElementById('music-play');
+  const musicMute = document.getElementById('music-mute');
+  const musicVolume = document.getElementById('music-volume');
+  const musicStatus = document.getElementById('music-status');
+  const musicHint = document.getElementById('music-hint');
+
+  if (backgroundMusic && musicWelcome) {
+    backgroundMusic.volume = 0.22;
+
+    function closeMusicWelcome() {
+      musicWelcome.classList.add('is-hidden');
+      window.setTimeout(() => { musicWelcome.hidden = true; }, 700);
+    }
+
+    function setMusicUI(isPlaying) {
+      if (musicPlay) {
+        musicPlay.textContent = isPlaying ? 'Ⅱ' : '▶';
+        musicPlay.setAttribute('aria-label', isPlaying ? 'Pause background music' : 'Play background music');
+      }
+      if (musicStatus) musicStatus.textContent = isPlaying ? 'Music playing' : 'Music off';
+    }
+
+    async function startBackgroundMusic() {
+      try {
+        await backgroundMusic.play();
+        setMusicUI(true);
+        closeMusicWelcome();
+      } catch (error) {
+        setMusicUI(false);
+        if (musicHint) musicHint.textContent = 'Add assets/zycee-background.mp3 to the website, then try again.';
+        if (musicStatus) musicStatus.textContent = 'Add music file';
+      }
+    }
+
+    if (musicEnter) musicEnter.addEventListener('click', startBackgroundMusic);
+    if (musicEnterSilent) musicEnterSilent.addEventListener('click', () => {
+      closeMusicWelcome();
+      setMusicUI(false);
+    });
+
+    if (musicPlay) musicPlay.addEventListener('click', async () => {
+      if (backgroundMusic.paused) {
+        try {
+          await backgroundMusic.play();
+          setMusicUI(true);
+        } catch (error) {
+          if (musicStatus) musicStatus.textContent = 'Add music file';
+        }
+      } else {
+        backgroundMusic.pause();
+        setMusicUI(false);
+      }
+    });
+
+    if (musicMute) musicMute.addEventListener('click', () => {
+      backgroundMusic.muted = !backgroundMusic.muted;
+      musicMute.textContent = backgroundMusic.muted ? 'Unmute' : 'Mute';
+      musicMute.setAttribute('aria-pressed', String(backgroundMusic.muted));
+    });
+
+    if (musicVolume) musicVolume.addEventListener('input', () => {
+      backgroundMusic.volume = Number(musicVolume.value) / 100;
+      if (backgroundMusic.volume > 0 && backgroundMusic.muted) {
+        backgroundMusic.muted = false;
+        if (musicMute) {
+          musicMute.textContent = 'Mute';
+          musicMute.setAttribute('aria-pressed', 'false');
+        }
+      }
+    });
+
+    backgroundMusic.addEventListener('ended', () => setMusicUI(false));
+    backgroundMusic.addEventListener('error', () => {
+      if (musicStatus) musicStatus.textContent = 'Add music file';
+    });
+    backgroundMusic.addEventListener('play', () => setMusicUI(true));
+    backgroundMusic.addEventListener('pause', () => setMusicUI(false));
+  }
+
 })();
