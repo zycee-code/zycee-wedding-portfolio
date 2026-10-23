@@ -229,41 +229,45 @@
     backgroundMusic.addEventListener('pause', () => setMusicUI(false));
   }
 
-  // ZYCEE 360-degree finger-controlled 3D card
+  // ZYCEE full 3D virtual rotation: drag in any direction (X + Y axes)
   const heroFlipCard = document.getElementById('hero-flip-card');
   if (heroFlipCard) {
-    let angle = 0;
-    let startX = 0;
-    let startAngle = 0;
+    let angleY = 0;
+    let angleX = 0;
+    let startX = 0, startY = 0;
+    let startAngleY = 0, startAngleX = 0;
     let pointerId = null;
     let dragged = false;
     let suppressClick = false;
 
-    function setAngle(value) {
-      angle = ((value % 360) + 360) % 360;
-      heroFlipCard.style.setProperty('--flip-angle', angle + 'deg');
-      const showingBack = angle > 90 && angle < 270;
+    function renderRotation() {
+      heroFlipCard.style.setProperty('--flip-angle', angleY + 'deg');
+      heroFlipCard.style.setProperty('--flip-vertical', angleX + 'deg');
+      const showingBack = Math.cos(angleY * Math.PI / 180) < 0;
       heroFlipCard.setAttribute('aria-pressed', String(showingBack));
     }
+    function normalize(value) { return ((value % 360) + 360) % 360; }
 
     heroFlipCard.addEventListener('pointerdown', event => {
       if (event.pointerType === 'mouse' && event.button !== 0) return;
       pointerId = event.pointerId;
-      startX = event.clientX;
-      startAngle = angle;
-      dragged = false;
-      suppressClick = false;
+      startX = event.clientX; startY = event.clientY;
+      startAngleY = angleY; startAngleX = angleX;
+      dragged = false; suppressClick = false;
       heroFlipCard.classList.add('is-dragging');
       try { heroFlipCard.setPointerCapture(pointerId); } catch (_) {}
     });
 
     heroFlipCard.addEventListener('pointermove', event => {
       if (pointerId !== event.pointerId) return;
-      const deltaX = event.clientX - startX;
-      if (Math.abs(deltaX) > 5) dragged = true;
+      const dx = event.clientX - startX;
+      const dy = event.clientY - startY;
+      if (Math.abs(dx) > 4 || Math.abs(dy) > 4) dragged = true;
       if (dragged) {
-        // Move your finger horizontally to rotate the card through a full 360°.
-        setAngle(startAngle + deltaX * 1.15);
+        // Horizontal drag rotates around Y; vertical drag rotates around X.
+        angleY = normalize(startAngleY + dx * 0.85);
+        angleX = normalize(startAngleX - dy * 0.85);
+        renderRotation();
       }
     });
 
@@ -280,26 +284,27 @@
       heroFlipCard.classList.remove('is-dragging');
     });
 
-    // A simple tap still flips to the other side; dragging rotates freely.
     heroFlipCard.addEventListener('click', event => {
       if (suppressClick) {
         suppressClick = false;
         event.preventDefault();
         return;
       }
-      setAngle(angle + 180);
+      angleY = normalize(angleY + 180);
+      renderRotation();
     });
 
     heroFlipCard.addEventListener('keydown', event => {
       if (event.key === 'Enter' || event.key === ' ') {
-        event.preventDefault();
-        setAngle(angle + 180);
+        event.preventDefault(); angleY = normalize(angleY + 180); renderRotation();
       } else if (event.key === 'ArrowRight') {
-        event.preventDefault();
-        setAngle(angle + 30);
+        event.preventDefault(); angleY = normalize(angleY + 20); renderRotation();
       } else if (event.key === 'ArrowLeft') {
-        event.preventDefault();
-        setAngle(angle - 30);
+        event.preventDefault(); angleY = normalize(angleY - 20); renderRotation();
+      } else if (event.key === 'ArrowUp') {
+        event.preventDefault(); angleX = normalize(angleX - 20); renderRotation();
+      } else if (event.key === 'ArrowDown') {
+        event.preventDefault(); angleX = normalize(angleX + 20); renderRotation();
       }
     });
   }

@@ -37,11 +37,11 @@ body>*:not(#particle-canvas){position:relative;z-index:2}
   height: 510px;
   perspective: 1400px;
   transform-style: preserve-3d;
-  transform: rotateY(var(--flip-angle, 0deg));
+  transform: rotateX(var(--flip-vertical, 0deg)) rotateY(var(--flip-angle, 0deg));
   cursor: grab;
   -webkit-tap-highlight-color: transparent;
   outline: none;
-  touch-action: pan-y;
+  touch-action: none;
   user-select: none;
   -webkit-user-select: none;
 }
@@ -89,3 +89,8 @@ body>*:not(#particle-canvas){position:relative;z-index:2}
   .flip-hint { bottom: 15px; }
 }
 @media(prefers-reduced-motion:reduce) { .hero-flip-front img { transition-duration: .01ms; } }
+
+/* Full 3D virtual rotation: drag up/down AND left/right */
+.hero-flip-card { transition: transform 80ms linear; will-change: transform; }
+.hero-flip-card.is-dragging { transition: none; }
+.hero-flip-face { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
