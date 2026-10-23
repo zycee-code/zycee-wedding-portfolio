@@ -28,3 +28,23 @@ body>*:not(#particle-canvas){position:relative;z-index:2}
 /* Ensure welcome overlay covers the viewport and appears first on page load. */
 .music-welcome{position:fixed!important;inset:0!important;z-index:9999!important;min-height:100dvh;box-sizing:border-box}
 .music-welcome[hidden]{display:none!important}
+
+
+/* ZYCEE 3D wedding flip card */
+.hero-flip-card{position:relative;width:100%;height:510px;perspective:1400px;cursor:pointer;-webkit-tap-highlight-color:transparent;outline:none}
+.hero-flip-card:focus-visible{outline:2px solid var(--gold);outline-offset:6px}
+.hero-flip-face{position:absolute;inset:0;width:100%;height:100%;overflow:hidden;border:1px solid rgba(216,183,122,.25);backface-visibility:hidden;-webkit-backface-visibility:hidden;transform-style:preserve-3d;transition:transform 850ms cubic-bezier(.2,.75,.25,1);box-shadow:0 20px 55px rgba(0,0,0,.24)}
+.hero-flip-front{transform:rotateY(0deg)}
+.hero-flip-front .hero-image{height:100%;width:100%;border-radius:190px 190px 2px 2px}
+.hero-flip-front img{transition:transform 850ms ease,filter 850ms ease}
+.hero-flip-card:hover .hero-flip-front img{transform:scale(1.035)}
+.hero-flip-back{display:flex;flex-direction:column;justify-content:center;align-items:center;padding:clamp(24px,5vw,48px);text-align:center;background:radial-gradient(ellipse at top,rgba(216,183,122,.16),transparent 60%),linear-gradient(145deg,#292219,#121110 75%);transform:rotateY(180deg);border-radius:190px 190px 2px 2px}
+.hero-flip-back::before{content:"ZYCEE";position:absolute;font-family:var(--serif);font-size:clamp(4rem,10vw,7rem);letter-spacing:.12em;color:rgba(216,183,122,.055);pointer-events:none}
+.flip-back-kicker{position:relative;color:var(--gold);font-size:.62rem;font-weight:600;letter-spacing:.2em;margin-bottom:24px}
+.hero-flip-back h3{position:relative;font-family:var(--serif);font-size:clamp(2rem,4vw,3rem);line-height:1.15;font-weight:500;color:var(--text);margin:0 0 22px}
+.hero-flip-back p{position:relative;max-width:340px;font-size:.88rem;line-height:1.95;color:var(--muted);margin:0 0 28px}
+.flip-hint{position:absolute;bottom:20px;left:0;width:100%;text-align:center;font-size:.58rem;letter-spacing:.16em;color:var(--gold-light)}
+.hero-flip-card.is-flipped .hero-flip-front{transform:rotateY(-180deg)}
+.hero-flip-card.is-flipped .hero-flip-back{transform:rotateY(0deg)}
+@media(max-width:760px){.hero-flip-card{height:420px}.hero-flip-back{padding:28px 22px}.hero-flip-back h3{font-size:2rem}.hero-flip-back p{font-size:.78rem;line-height:1.8}.flip-back-kicker{font-size:.54rem;margin-bottom:18px}.flip-hint{bottom:15px}}
+@media(prefers-reduced-motion:reduce){.hero-flip-face,.hero-flip-front img{transition-duration:.01ms}}

@@ -229,4 +229,20 @@
     backgroundMusic.addEventListener('pause', () => setMusicUI(false));
   }
 
+  // ZYCEE 3D wedding image flip interaction
+  const heroFlipCard = document.getElementById('hero-flip-card');
+  if (heroFlipCard) {
+    function flipHeroCard() {
+      const flipped = heroFlipCard.classList.toggle('is-flipped');
+      heroFlipCard.setAttribute('aria-pressed', String(flipped));
+    }
+    heroFlipCard.addEventListener('click', flipHeroCard);
+    heroFlipCard.addEventListener('keydown', event => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        flipHeroCard();
+      }
+    });
+  }
+
 })();
