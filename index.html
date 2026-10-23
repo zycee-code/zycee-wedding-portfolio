@@ -12,6 +12,28 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+  <!-- Added music feature only: existing page content is otherwise unchanged. -->
+  <section class="music-welcome" id="music-welcome" aria-label="Welcome with music">
+    <div class="music-welcome-card">
+      <p class="music-kicker">WELCOME TO ZYCEE</p>
+      <h2>Some moments deserve<br><em>a soundtrack.</em></h2>
+      <p>Step into a world of stories, feeling and beautiful edits.</p>
+      <button class="music-enter" id="music-enter" type="button">Enter with music <span>♫</span></button>
+      <button class="music-enter-silent" id="music-enter-silent" type="button">Enter without music</button>
+      <p class="music-hint" id="music-hint" role="status">Music starts only when you choose to enter.</p>
+    </div>
+  </section>
+  <audio id="background-music" src="assets/zycee-background.mp3" loop preload="none"></audio>
+  <div class="music-player" id="music-player" aria-label="Background music controls">
+    <button class="music-play" id="music-play" type="button" aria-label="Play background music">▶</button>
+    <button class="music-mute" id="music-mute" type="button" aria-pressed="false">Mute</button>
+    <label class="music-volume-label" for="music-volume">Volume</label>
+    <input id="music-volume" class="music-volume" type="range" min="0" max="100" value="22" aria-label="Music volume">
+    <span class="music-status" id="music-status" role="status">Music off</span>
+  </div>
+
+
   <div class="ambient" aria-hidden="true"></div>
   <canvas id="particle-canvas" aria-hidden="true"></canvas>
   <header class="site-header">
@@ -120,25 +142,6 @@
   <footer class="footer section-wrap"><a class="brand" href="#home">ZYCEE<span>®</span></a><p>Made with feeling. Edited with care.</p><a href="#home" class="back-top">BACK TO TOP ↑</a><small>© <span id="year"></span> ZYCEE. All rights reserved.</small></footer>
   <button class="sound-toggle" type="button" aria-pressed="false"><span class="sound-icon">♪</span> <span class="sound-label">Sounds off</span></button>
 
-  <!-- Added music feature only: existing page content is otherwise unchanged. -->
-  <section class="music-welcome" id="music-welcome" aria-label="Welcome with music">
-    <div class="music-welcome-card">
-      <p class="music-kicker">WELCOME TO ZYCEE</p>
-      <h2>Some moments deserve<br><em>a soundtrack.</em></h2>
-      <p>Step into a world of stories, feeling and beautiful edits.</p>
-      <button class="music-enter" id="music-enter" type="button">Enter with music <span>♫</span></button>
-      <button class="music-enter-silent" id="music-enter-silent" type="button">Enter without music</button>
-      <p class="music-hint" id="music-hint" role="status">Music starts only when you choose to enter.</p>
-    </div>
-  </section>
-  <audio id="background-music" src="assets/zycee-background.mp3" loop preload="none"></audio>
-  <div class="music-player" id="music-player" aria-label="Background music controls">
-    <button class="music-play" id="music-play" type="button" aria-label="Play background music">▶</button>
-    <button class="music-mute" id="music-mute" type="button" aria-pressed="false">Mute</button>
-    <label class="music-volume-label" for="music-volume">Volume</label>
-    <input id="music-volume" class="music-volume" type="range" min="0" max="100" value="22" aria-label="Music volume">
-    <span class="music-status" id="music-status" role="status">Music off</span>
-  </div>
 
   <script src="script.js"></script>
 </body>

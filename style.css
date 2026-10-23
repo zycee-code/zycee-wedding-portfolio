@@ -24,3 +24,7 @@ body>*:not(#particle-canvas){position:relative;z-index:2}
 .music-status{font-size:.6rem;color:#c9beac;white-space:nowrap}
 @media(max-width:760px){.music-player{left:10px;bottom:62px;gap:7px;padding:7px 8px;max-width:calc(100vw - 20px)}.music-volume{width:58px}.music-status{font-size:.56rem}.music-welcome-card{padding:30px 22px}}
 @media(prefers-reduced-motion:reduce){.music-welcome,.music-enter{transition:none}}
+
+/* Ensure welcome overlay covers the viewport and appears first on page load. */
+.music-welcome{position:fixed!important;inset:0!important;z-index:9999!important;min-height:100dvh;box-sizing:border-box}
+.music-welcome[hidden]{display:none!important}

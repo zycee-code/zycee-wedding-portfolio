@@ -143,7 +143,7 @@
     });
   }
 
-  // Added calm looping background music. Playback begins only after visitor interaction.
+  // Try autoplay immediately. Browsers may block audible autoplay until the visitor taps.
   const backgroundMusic = document.getElementById('background-music');
   const musicWelcome = document.getElementById('music-welcome');
   const musicEnter = document.getElementById('music-enter');
@@ -177,11 +177,13 @@
         closeMusicWelcome();
       } catch (error) {
         setMusicUI(false);
-        if (musicHint) musicHint.textContent = 'Add assets/zycee-background.mp3 to the website, then try again.';
-        if (musicStatus) musicStatus.textContent = 'Add music file';
+        if (musicHint) musicHint.textContent = 'Your browser blocked autoplay. Tap “Enter with music” to start the soundtrack.';
+        if (musicStatus) musicStatus.textContent = 'Tap to play';
       }
     }
 
+    // Automatically try when the page opens; if blocked, the welcome screen stays visible.
+    startBackgroundMusic();
     if (musicEnter) musicEnter.addEventListener('click', startBackgroundMusic);
     if (musicEnterSilent) musicEnterSilent.addEventListener('click', () => {
       closeMusicWelcome();
